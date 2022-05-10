@@ -1,0 +1,8 @@
+{
+  "name": "contacts",
+  "version": "0.1.0",
+  "description": "test-task-contacts",
+  "main": "index.jsx",
+  "author": "Almaz Yakhin <yamaz.job@gmail.com>",
+  "license": "MIT"
+}
