@@ -3,9 +3,9 @@
   "description": "test-task-contacts",
   "version": "0.1.0",
   "author": "Almaz Yakhin <yamaz.job@gmail.com>",
-  "homepage": "https://ya-maz.github.io/fictional-dollop/",
   "license": "MIT",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -50,5 +50,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@redux-devtools/extension": "^3.2.2"
   }
 }
