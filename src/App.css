@@ -1,3 +1,9 @@
+@import "~antd/dist/antd.css";
+
 .App {
   text-align: center;
+}
+
+.h100 {
+  height: calc(100vh - 50px);
 }
