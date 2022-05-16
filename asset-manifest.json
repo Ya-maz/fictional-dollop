@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/fictional-dollop/static/css/main.d958ce65.css",
+    "main.js": "/fictional-dollop/static/js/main.59a77093.js",
+    "index.html": "/fictional-dollop/index.html",
+    "main.d958ce65.css.map": "/fictional-dollop/static/css/main.d958ce65.css.map",
+    "main.59a77093.js.map": "/fictional-dollop/static/js/main.59a77093.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d958ce65.css",
+    "static/js/main.59a77093.js"
+  ]
+}
