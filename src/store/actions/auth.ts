@@ -9,7 +9,7 @@ import { IUser } from "../../model/IUser";
 import UserService from "../../services";
 import { AppDispatch } from "../";
 
-export const ActionCreators = {
+export const ActionAuthCreators = {
   setUser: (user: IUser): SetUserAction => ({
     type: AuthActionEnum.SET_USER,
     payload: user,
@@ -29,7 +29,7 @@ export const ActionCreators = {
   login:
     (username: string, password: string) => async (dispatch: AppDispatch) => {
       try {
-        dispatch(ActionCreators.setIsLoading(true));
+        dispatch(ActionAuthCreators.setIsLoading(true));
         setTimeout(async () => {
           const response = await UserService.getUsers();
           const mock = response.data.find(
@@ -39,23 +39,23 @@ export const ActionCreators = {
           if (mock) {
             localStorage.setItem("auth", "true");
             localStorage.setItem("user", mock.user);
-            dispatch(ActionCreators.setUser(mock));
-            dispatch(ActionCreators.setIsAuth(true));
+            dispatch(ActionAuthCreators.setUser(mock));
+            dispatch(ActionAuthCreators.setIsAuth(true));
           } else {
-            dispatch(ActionCreators.setError("invalid username or password"));
+            dispatch(ActionAuthCreators.setError("invalid username or password"));
           }
-          dispatch(ActionCreators.setIsLoading(false));
+          dispatch(ActionAuthCreators.setIsLoading(false));
         }, 500);
       } catch (e) {
-        dispatch(ActionCreators.setError("Error"));
+        dispatch(ActionAuthCreators.setError("Error"));
       }
     },
   logout: () => async (dispatch: AppDispatch) => {
     try {
       localStorage.removeItem("auth");
       localStorage.removeItem("user");
-      dispatch(ActionCreators.setUser({} as IUser));
-      dispatch(ActionCreators.setIsAuth(false));
+      dispatch(ActionAuthCreators.setUser({} as IUser));
+      dispatch(ActionAuthCreators.setIsAuth(false));
     } catch (e) {
       console.log("trouble happens...")
     }

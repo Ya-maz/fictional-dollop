@@ -1,5 +1,5 @@
-import { ActionCreators } from "./auth";
+import { ActionAuthCreators } from "./auth";
 
 export const allActionCreators = {
-  ...ActionCreators,
+  ...ActionAuthCreators,
 };
