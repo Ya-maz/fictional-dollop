@@ -6,7 +6,7 @@ const Contacts = () => {
   return (
     <Layout>
       <Row justify="center" align="middle" className="h100">
-        <Col span={6}>
+        <Col span={8}>
           <Card>
             <ListContacts />
           </Card>

@@ -10,4 +10,4 @@ const Wrapper = () => {
     </Layout>
   );
 };
-export default Wrapper
+export default Wrapper;
