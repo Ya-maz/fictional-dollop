@@ -94,7 +94,16 @@ export interface isLoading {
 }
 
 export type ContactsAction =
-  | GetContactsAction
-  | AddContactsAction
-  | DeleteContactsAction
-  | EditContactsAction;
+  | isLoading
+  | GetContactsActionPending
+  | GetContactsActionSuccess
+  | GetContactsActionFailed
+  | AddContactsActionPending
+  | AddContactsActionSuccess
+  | AddContactsActionFailed
+  | DeleteContactsActionPending
+  | DeleteContactsActionSuccess
+  | DeleteContactsActionFailed
+  | EditContactsActionPending
+  | EditContactsActionSuccess
+  | EditContactsActionFailed;
