@@ -17,6 +17,7 @@ import {
   isLoading,
 } from "../types/contacts";
 import { IContact, WeakContact } from "../../model/IContact";
+import { api } from "../../api";
 
 export const ContatctsActionCreators = {
   getContacts: {
@@ -81,8 +82,8 @@ export const fetchGetContacts = () => async (dispatch: Dispatch) => {
   try {
     dispatch(ContatctsActionCreators.loading(true));
     dispatch(ContatctsActionCreators.getContacts.pending());
-    const response = await Api.get();
-    dispatch(ContatctsActionCreators.getContacts.success(response.data.body));
+    const response = await api.get();
+    dispatch(ContatctsActionCreators.getContacts.success(response));
     dispatch(ContatctsActionCreators.loading(false));
   } catch (error) {
     dispatch(ContatctsActionCreators.getContacts.failed(error));
@@ -94,8 +95,10 @@ export const fetchAddContacts =
     try {
       dispatch(ContatctsActionCreators.loading(true));
       dispatch(ContatctsActionCreators.addContacts.pending());
-      const response = await Api.post(contacts);
-      dispatch(ContatctsActionCreators.addContacts.success(response.data.body));
+      const response = await api.add(contacts);
+      dispatch(
+        ContatctsActionCreators.addContacts.success(response.statusText)
+      );
       dispatch(ContatctsActionCreators.loading(false));
     } catch (error) {
       dispatch(ContatctsActionCreators.addContacts.failed(error));
@@ -107,9 +110,9 @@ export const fetchDeleteContacts =
     try {
       dispatch(ContatctsActionCreators.loading(true));
       dispatch(ContatctsActionCreators.deleteContacts.pending());
-      const response = await Api.delete(id);
+      const response = await api.delete(id);
       dispatch(
-        ContatctsActionCreators.deleteContacts.success(response.data.body)
+        ContatctsActionCreators.deleteContacts.success(response.statusText)
       );
       dispatch(ContatctsActionCreators.loading(false));
     } catch (error) {
@@ -121,8 +124,8 @@ export const fetchEditContacts = (id: number) => async (dispatch: Dispatch) => {
   try {
     dispatch(ContatctsActionCreators.loading(true));
     dispatch(ContatctsActionCreators.editContacts.pending());
-    const response = await Api.delete(id);
-    dispatch(ContatctsActionCreators.editContacts.success(response.data.body));
+    const response = await api.delete(id);
+    dispatch(ContatctsActionCreators.editContacts.success(response.statusText));
     dispatch(ContatctsActionCreators.loading(false));
   } catch (error) {
     dispatch(ContatctsActionCreators.editContacts.failed(error));
