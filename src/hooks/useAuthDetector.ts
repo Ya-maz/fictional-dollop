@@ -2,10 +2,13 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { IUser } from "../model/IUser";
+import { authSelector } from "../store/selectors";
 import { useActions } from "./useActions";
+import { useTypeSelector } from "./useTypeSelector";
 
 export const useAuthDetector = () => {
   const { setUser, setIsAuth } = useActions();
+  const {isAuth} = useTypeSelector(authSelector)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,5 +17,5 @@ export const useAuthDetector = () => {
       setIsAuth(true);
       return navigate("/");
     }
-  }, [navigate]);
+  }, [isAuth,navigate]);
 };

@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import Wrapper from "./Wrapper";
 import RequireAuth from "./RequireAuth";
@@ -19,6 +19,10 @@ const AppRouter = () => {
           }
         />
         <Route path={RouteNames.LOGIN} element={<Login />} />
+        <Route
+          path="*"
+          element={<Navigate replace to={RouteNames.CONTACTS} />}
+        />
       </Route>
     </Routes>
   );
