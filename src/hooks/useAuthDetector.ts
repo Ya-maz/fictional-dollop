@@ -7,7 +7,7 @@ import { useActions } from "./useActions";
 import { useTypeSelector } from "./useTypeSelector";
 
 export const useAuthDetector = () => {
-  const { setUser, setIsAuth } = useActions();
+  const { setUser, setIsAuth, get } = useActions();
   const {isAuth} = useTypeSelector(authSelector)
   const navigate = useNavigate();
 
@@ -15,7 +15,8 @@ export const useAuthDetector = () => {
     if (localStorage.getItem("auth")) {
       setUser({ user: localStorage.getItem("user" || "") } as IUser);
       setIsAuth(true);
+      get();
       return navigate("/");
     }
-  }, [isAuth,navigate]);
+  }, [isAuth]);
 };

@@ -1,19 +1,17 @@
 import { IContact } from "../../model/IContact";
-import { ActionContactsEnum, ContactsAction } from "../types/contacts";
+import { ActionContactsEnum, ContactsAction, ContactsState } from "../types/contacts";
 
-const initialState = {
+export const initialState = {
   isLoading: false,
   contacts: [] as IContact[],
   error: "" as string | unknown,
   message: "",
 };
 
-type StateType = typeof initialState;
-
 const contactsReducer = (
-  state: StateType = initialState,
+  state: ContactsState = initialState,
   action: ContactsAction
-): StateType => {
+): ContactsState => {
   switch (action.type) {
     case ActionContactsEnum.SET_IS_LOADING:
       return { ...state, isLoading: action.payload };

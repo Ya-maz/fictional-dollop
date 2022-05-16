@@ -1,71 +1,52 @@
 import { List, Avatar, Button, Space, Col, Divider } from "antd";
 import { PlusOutlined, CloseOutlined, EditOutlined } from "@ant-design/icons";
 import SearchPanel from "./SearchPanel";
+import { useTypeSelector } from "../hooks/useTypeSelector";
+import { contactsSelector } from "../store/selectors";
+import ListPanel from "./ListPanel";
 
-const data = [
-  {
-    title: "Ant Design Title 1",
-  },
-  {
-    title: "Ant Design Title 2",
-  },
-  {
-    title: "Ant Design Title 3",
-  },
-  {
-    title: "Ant Design Title 4",
-  },
-];
+const ListContacts = () => {
+  const { contacts } = useTypeSelector(contactsSelector);
 
-const ListPanel = () => (
-  <Space size={"small"}>
-    <Button type="dashed">
-      <EditOutlined />
-    </Button>
-    <Button type="dashed">
-      <CloseOutlined />
-    </Button>
-  </Space>
-);
-
-const ListContacts = () => (
-  <Col>
-    <SearchPanel />
-    <Divider orientation="left" plain>
-      Contacts
-    </Divider>
-    <List
-      itemLayout="horizontal"
-      dataSource={data}
-      renderItem={(item, i) => (
-        <>
-          <List.Item style={{ display: "flex", flexDirection: "row" }}>
-            <>
+  return (
+    <Col>
+      <SearchPanel />
+      <Divider orientation="left" plain>
+        Contacts
+      </Divider>
+      <List
+        itemLayout="horizontal"
+        dataSource={contacts}
+        renderItem={(contact, index) => (
+          <>
+            <List.Item
+              extra={<ListPanel id={contact.id} />}
+              style={{ display: "flex", flexDirection: "row" }}
+            >
               <List.Item.Meta
                 avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-                title={<a href="https://ant.design">{item.title}</a>}
-                description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                title={<a href="https://ant.design">{contact.title}</a>}
+                description={contact.description}
               />
-              <ListPanel />
-            </>
-          </List.Item>
-          {i === data.length - 1 && (
-            <List.Item
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignSelf: "center",
-              }}
-            >
-              <Button type="primary" icon={<PlusOutlined />}>
-                Add
-              </Button>
             </List.Item>
-          )}
-        </>
-      )}
-    />
-  </Col>
-);
+            {index === contacts.length - 1 && (
+              <List.Item
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignSelf: "center",
+                }}
+              >
+                <Button type="primary" icon={<PlusOutlined />}>
+                  Add
+                </Button>
+              </List.Item>
+            )}
+          </>
+        )}
+      />
+    </Col>
+  );
+};
 
 export default ListContacts;

@@ -1,4 +1,7 @@
 import { IContact } from "../../model/IContact";
+import { initialState } from "../reducers/contacts";
+
+export type ContactsState = typeof initialState;
 
 export const enum ActionContactsEnum {
   CONTACTS_GET = "CONTACTS_GET",

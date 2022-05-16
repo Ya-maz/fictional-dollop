@@ -1,5 +1,3 @@
-import { Dispatch } from "redux";
-
 import {
   ActionContactsEnum,
   GetContactsActionPending,
@@ -18,8 +16,9 @@ import {
 } from "../types/contacts";
 import { IContact, WeakContact } from "../../model/IContact";
 import { api } from "../../api";
+import { AppDispatch } from "..";
 
-export const ContatctsActionCreators = {
+export const ActionContactsCreatorsFlag = {
   getContacts: {
     pending: (): GetContactsActionPending => ({
       type: ActionContactsEnum.CONTACTS_GET,
@@ -78,56 +77,55 @@ export const ContatctsActionCreators = {
   }),
 };
 
-export const fetchGetContacts = () => async (dispatch: Dispatch) => {
-  try {
-    dispatch(ContatctsActionCreators.loading(true));
-    dispatch(ContatctsActionCreators.getContacts.pending());
-    const response = await api.get();
-    dispatch(ContatctsActionCreators.getContacts.success(response));
-    dispatch(ContatctsActionCreators.loading(false));
-  } catch (error) {
-    dispatch(ContatctsActionCreators.getContacts.failed(error));
-  }
-};
-
-export const fetchAddContacts =
-  (contacts: WeakContact) => async (dispatch: Dispatch) => {
+export const ActionContactsCreators = {
+  get: () => async (dispatch: AppDispatch) => {
     try {
-      dispatch(ContatctsActionCreators.loading(true));
-      dispatch(ContatctsActionCreators.addContacts.pending());
+      dispatch(ActionContactsCreatorsFlag.loading(true));
+      dispatch(ActionContactsCreatorsFlag.getContacts.pending());
+      const response = await api.get();
+      dispatch(ActionContactsCreatorsFlag.getContacts.success(response));
+      dispatch(ActionContactsCreatorsFlag.loading(false));
+    } catch (error) {
+      dispatch(ActionContactsCreatorsFlag.getContacts.failed(error));
+    }
+  },
+  add: (contacts: WeakContact) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(ActionContactsCreatorsFlag.loading(true));
+      dispatch(ActionContactsCreatorsFlag.addContacts.pending());
       const response = await api.add(contacts);
       dispatch(
-        ContatctsActionCreators.addContacts.success(response.statusText)
+        ActionContactsCreatorsFlag.addContacts.success(response.statusText)
       );
-      dispatch(ContatctsActionCreators.loading(false));
+      dispatch(ActionContactsCreatorsFlag.loading(false));
     } catch (error) {
-      dispatch(ContatctsActionCreators.addContacts.failed(error));
+      dispatch(ActionContactsCreatorsFlag.addContacts.failed(error));
     }
-  };
-
-export const fetchDeleteContacts =
-  (id: number) => async (dispatch: Dispatch) => {
+  },
+  remove: (id: number) => async (dispatch: AppDispatch) => {
     try {
-      dispatch(ContatctsActionCreators.loading(true));
-      dispatch(ContatctsActionCreators.deleteContacts.pending());
+      dispatch(ActionContactsCreatorsFlag.loading(true));
+      dispatch(ActionContactsCreatorsFlag.deleteContacts.pending());
       const response = await api.delete(id);
       dispatch(
-        ContatctsActionCreators.deleteContacts.success(response.statusText)
+        ActionContactsCreatorsFlag.deleteContacts.success(response.statusText)
       );
-      dispatch(ContatctsActionCreators.loading(false));
+      dispatch(ActionContactsCreatorsFlag.loading(false));
     } catch (error) {
-      dispatch(ContatctsActionCreators.deleteContacts.failed(error));
+      dispatch(ActionContactsCreatorsFlag.deleteContacts.failed(error));
     }
-  };
-
-export const fetchEditContacts = (id: number) => async (dispatch: Dispatch) => {
-  try {
-    dispatch(ContatctsActionCreators.loading(true));
-    dispatch(ContatctsActionCreators.editContacts.pending());
-    const response = await api.delete(id);
-    dispatch(ContatctsActionCreators.editContacts.success(response.statusText));
-    dispatch(ContatctsActionCreators.loading(false));
-  } catch (error) {
-    dispatch(ContatctsActionCreators.editContacts.failed(error));
-  }
+  },
+  edit: (contacts: WeakContact, id: number) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(ActionContactsCreatorsFlag.loading(true));
+      dispatch(ActionContactsCreatorsFlag.editContacts.pending());
+      const response = await api.edit(contacts, id);
+      dispatch(
+        ActionContactsCreatorsFlag.editContacts.success(response.statusText)
+      );
+      dispatch(ActionContactsCreatorsFlag.loading(false));
+    } catch (error) {
+      dispatch(ActionContactsCreatorsFlag.editContacts.failed(error));
+    }
+  },
 };

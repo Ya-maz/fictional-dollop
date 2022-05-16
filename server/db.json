@@ -1,7 +1,7 @@
 {
   "contacts": [
     {
-      "id": "001",
+      "id": "1",
       "title": "Juana",
       "description": "Perez",
       "email": "juanaperez@test.com",
@@ -14,14 +14,6 @@
       "id": "9999",
       "phone": "",
       "email": "kk@kk",
-      "image": "https://joeschmoe.io/api/v1/random"
-    },
-    {
-      "title": "Leonardo",
-      "description": "Pandolfi",
-      "id": "021",
-      "phone": "",
-      "email": "leo@leo",
       "image": "https://joeschmoe.io/api/v1/random"
     }
   ]
