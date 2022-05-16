@@ -7,7 +7,7 @@ import { authSelector } from "../store/selectors";
 const RequireAuth = ({ children }: { children: JSX.Element }) => {
   const { isAuth } = useTypeSelector(authSelector);
   const location = useLocation();
-  console.log("auth", isAuth);
+
   if (!isAuth) {
     return (
       <Navigate to={RouteNames.LOGIN} state={{ from: location }} replace />

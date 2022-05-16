@@ -10,7 +10,6 @@ const AppRouter = () => {
   return (
     <Routes>
       <Route element={<Wrapper />}>
-        <Route path={RouteNames.LOGIN} element={<Login />} />
         <Route
           path={RouteNames.CONTACTS}
           element={
@@ -19,6 +18,7 @@ const AppRouter = () => {
             </RequireAuth>
           }
         />
+        <Route path={RouteNames.LOGIN} element={<Login />} />
       </Route>
     </Routes>
   );
