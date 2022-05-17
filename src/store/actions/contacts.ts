@@ -98,6 +98,7 @@ export const ActionContactsCreators = {
         ActionContactsCreatorsFlag.addContacts.success(response.statusText)
       );
       dispatch(ActionContactsCreatorsFlag.loading(false));
+      dispatch(ActionContactsCreators.get())
     } catch (error) {
       dispatch(ActionContactsCreatorsFlag.addContacts.failed(error));
     }
@@ -111,6 +112,7 @@ export const ActionContactsCreators = {
         ActionContactsCreatorsFlag.deleteContacts.success(response.statusText)
       );
       dispatch(ActionContactsCreatorsFlag.loading(false));
+      dispatch(ActionContactsCreators.get())
     } catch (error) {
       dispatch(ActionContactsCreatorsFlag.deleteContacts.failed(error));
     }
@@ -124,6 +126,7 @@ export const ActionContactsCreators = {
         ActionContactsCreatorsFlag.editContacts.success(response.statusText)
       );
       dispatch(ActionContactsCreatorsFlag.loading(false));
+      dispatch(ActionContactsCreators.get())
     } catch (error) {
       dispatch(ActionContactsCreatorsFlag.editContacts.failed(error));
     }

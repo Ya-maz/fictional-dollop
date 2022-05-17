@@ -1,12 +1,17 @@
-import { List, Avatar, Button, Space, Col, Divider } from "antd";
-import { PlusOutlined, CloseOutlined, EditOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import { List, Avatar, Button, Col, Divider } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 import SearchPanel from "./SearchPanel";
 import { useTypeSelector } from "../hooks/useTypeSelector";
 import { contactsSelector } from "../store/selectors";
 import ListPanel from "./ListPanel";
 
+import AddGroupe from "./AddGroup";
+
 const ListContacts = () => {
+  const [toggle, setToggle] = useState<boolean>(false);
   const { contacts } = useTypeSelector(contactsSelector);
+  const clickToggle = () => setToggle(!toggle);
 
   return (
     <Col>
@@ -30,17 +35,7 @@ const ListContacts = () => {
               />
             </List.Item>
             {index === contacts.length - 1 && (
-              <List.Item
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignSelf: "center",
-                }}
-              >
-                <Button type="primary" icon={<PlusOutlined />}>
-                  Add
-                </Button>
-              </List.Item>
+              <AddGroupe toggle={toggle} clickToggle={clickToggle} />
             )}
           </>
         )}
