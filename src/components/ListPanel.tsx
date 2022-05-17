@@ -4,7 +4,7 @@ import { CloseOutlined, EditOutlined } from "@ant-design/icons";
 import { useActions } from "../hooks/useActions";
 import React from "react";
 
-const ListPanel = ({ id }: {id:string}) => {
+const ListPanel = ({ id, onClick }: { id: string; onClick: () => void }) => {
   const { remove } = useActions();
 
   const removeContact = (e: React.MouseEvent<HTMLElement>) =>
@@ -12,7 +12,7 @@ const ListPanel = ({ id }: {id:string}) => {
 
   return (
     <Space size={"small"}>
-      <Button type="dashed">
+      <Button type="dashed" onClick={onClick}>
         <EditOutlined />
       </Button>
       <Button type="dashed" onClick={removeContact} id={id}>

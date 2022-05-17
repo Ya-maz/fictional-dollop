@@ -117,7 +117,7 @@ export const ActionContactsCreators = {
       dispatch(ActionContactsCreatorsFlag.deleteContacts.failed(error));
     }
   },
-  edit: (contacts: WeakContact, id: number) => async (dispatch: AppDispatch) => {
+  edit: (contacts: WeakContact, id: string) => async (dispatch: AppDispatch) => {
     try {
       dispatch(ActionContactsCreatorsFlag.loading(true));
       dispatch(ActionContactsCreatorsFlag.editContacts.pending());

@@ -28,7 +28,7 @@ export const api = {
         "Content-Type": "application/json;charset=utf-8",
       },
     }),
-  edit: async (newContact: WeakContact, id: number): Promise<Response> =>
+  edit: async (newContact: WeakContact, id:string): Promise<Response> =>
     await fetch(`${SERVER_API}${URL.CONTACTS}/${id}`, {
       method: "PUT",
       headers: {

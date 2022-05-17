@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { List, Avatar, Button, Col, Divider } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+
 import SearchPanel from "./SearchPanel";
 import { useTypeSelector } from "../hooks/useTypeSelector";
 import { contactsSelector } from "../store/selectors";
 import ListPanel from "./ListPanel";
-
 import AddGroupe from "./AddGroup";
+import InfoGroup from "./InfoGroup";
 
 const ListContacts = () => {
-  const [toggle, setToggle] = useState<boolean>(false);
+  const [addGroupeToggle, setAddGroupeToggle] = useState<boolean>(false);
+  // const [infoGroupeToggle, setInfoGroupeToggle] = useState<boolean>(false);
   const { contacts } = useTypeSelector(contactsSelector);
-  const clickToggle = () => setToggle(!toggle);
 
+  const switchAddGroupeToggle = () => setAddGroupeToggle(!addGroupeToggle);
+  // const switchInfoGroupeToggle = () => setInfoGroupeToggle(!infoGroupeToggle);
   return (
     <Col>
       <SearchPanel />
@@ -24,18 +26,14 @@ const ListContacts = () => {
         dataSource={contacts}
         renderItem={(contact, index) => (
           <>
-            <List.Item
-              extra={<ListPanel id={contact.id} />}
-              style={{ display: "flex", flexDirection: "row" }}
-            >
-              <List.Item.Meta
-                avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-                title={<a href="https://ant.design">{contact.title}</a>}
-                description={contact.description}
-              />
-            </List.Item>
+            <InfoGroup
+              contact={contact}
+            />
             {index === contacts.length - 1 && (
-              <AddGroupe toggle={toggle} clickToggle={clickToggle} />
+              <AddGroupe
+                toggle={addGroupeToggle}
+                clickToggle={switchAddGroupeToggle}
+              />
             )}
           </>
         )}
