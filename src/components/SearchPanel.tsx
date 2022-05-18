@@ -1,4 +1,5 @@
 import Search from "antd/lib/input/Search";
+
 import { useActions } from "../hooks/useActions";
 
 const SearchPanel = () => {

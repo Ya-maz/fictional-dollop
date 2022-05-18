@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+
 import { IUser } from "../model/IUser";
 
 export default class UserService {

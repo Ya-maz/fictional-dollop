@@ -1,8 +1,10 @@
+import React from "react";
 import Button from "antd/lib/button";
 import Space from "antd/lib/space";
 import { CloseOutlined, EditOutlined } from "@ant-design/icons";
+
 import { useActions } from "../hooks/useActions";
-import React from "react";
+
 
 const ListPanel = ({ id, onClick }: { id: string; onClick: () => void }) => {
   const { remove } = useActions();

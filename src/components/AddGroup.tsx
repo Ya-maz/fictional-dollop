@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { UserOutlined, IdcardOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, List, Form, Input } from "antd";
-import { useState } from "react";
+
 import { useActions } from "../hooks/useActions";
 
 const AddGroupe = ({
