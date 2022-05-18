@@ -16,6 +16,9 @@ export const enum ActionContactsEnum {
   CONTACTS_EDIT = "CONTACTS_EDIT",
   CONTACTS_EDIT_SUCCESS = "CONTACTS_EDIT_SUCCESS",
   CONTACTS_EDIT_FAILED = "CONTACTS_EDIT_FAILED",
+  CONTACTS_SEARCH = "CONTACTS_SEARCH",
+  CONTACTS_SEARCH_SUCCESS = "CONTACTS_SEARCH_SUCCESS",
+  CONTACTS_SEARCH_FAILED = "CONTACTS_SEARCH_FAILED",
   SET_IS_LOADING = "SET_IS_LOADING",
 }
 
@@ -90,7 +93,19 @@ export interface EditContactsAction {
   success: EditContactsActionSuccess;
   failed: EditContactsActionFailed;
 }
-
+//search
+export interface SearchContactsActionPending {
+  type: ActionContactsEnum.CONTACTS_SEARCH;
+}
+export interface SearchContactsActionSuccess {
+  type: ActionContactsEnum.CONTACTS_SEARCH_SUCCESS;
+  payload: IContact[];
+}
+export interface SearchContactsActionFailed {
+  type: ActionContactsEnum.CONTACTS_SEARCH_FAILED;
+  payload: unknown;
+}
+//loadig
 export interface isLoading {
   type: ActionContactsEnum.SET_IS_LOADING;
   payload: boolean;
@@ -109,4 +124,7 @@ export type ContactsAction =
   | DeleteContactsActionFailed
   | EditContactsActionPending
   | EditContactsActionSuccess
-  | EditContactsActionFailed;
+  | EditContactsActionFailed
+  | SearchContactsActionPending
+  | SearchContactsActionSuccess
+  | SearchContactsActionFailed;

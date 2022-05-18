@@ -36,4 +36,5 @@ export const api = {
       },
       body: JSON.stringify(newContact),
     }),
+    search: async (value:string) => await getFetch<IContact[]>(`${URL.CONTACTS}?q=${value}`),
 };

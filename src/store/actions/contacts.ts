@@ -13,6 +13,9 @@ import {
   EditContactsActionSuccess,
   EditContactsActionFailed,
   isLoading,
+  SearchContactsActionPending,
+  SearchContactsActionSuccess,
+  SearchContactsActionFailed,
 } from "../types/contacts";
 import { IContact, WeakContact } from "../../model/IContact";
 import { api } from "../../api";
@@ -71,6 +74,19 @@ export const ActionContactsCreatorsFlag = {
       payload: message,
     }),
   },
+  searchContacts: {
+    pending: (): SearchContactsActionPending => ({
+      type: ActionContactsEnum.CONTACTS_SEARCH,
+    }),
+    success: (contacts: IContact[]): SearchContactsActionSuccess => ({
+      type: ActionContactsEnum.CONTACTS_SEARCH_SUCCESS,
+      payload: contacts,
+    }),
+    failed: (message: unknown): SearchContactsActionFailed => ({
+      type: ActionContactsEnum.CONTACTS_SEARCH_FAILED,
+      payload: message,
+    }),
+  },
   loading: (bool: boolean): isLoading => ({
     type: ActionContactsEnum.SET_IS_LOADING,
     payload: bool,
@@ -98,7 +114,7 @@ export const ActionContactsCreators = {
         ActionContactsCreatorsFlag.addContacts.success(response.statusText)
       );
       dispatch(ActionContactsCreatorsFlag.loading(false));
-      dispatch(ActionContactsCreators.get())
+      dispatch(ActionContactsCreators.get());
     } catch (error) {
       dispatch(ActionContactsCreatorsFlag.addContacts.failed(error));
     }
@@ -112,23 +128,35 @@ export const ActionContactsCreators = {
         ActionContactsCreatorsFlag.deleteContacts.success(response.statusText)
       );
       dispatch(ActionContactsCreatorsFlag.loading(false));
-      dispatch(ActionContactsCreators.get())
+      dispatch(ActionContactsCreators.get());
     } catch (error) {
       dispatch(ActionContactsCreatorsFlag.deleteContacts.failed(error));
     }
   },
-  edit: (contacts: WeakContact, id: string) => async (dispatch: AppDispatch) => {
+  edit:
+    (contacts: WeakContact, id: string) => async (dispatch: AppDispatch) => {
+      try {
+        dispatch(ActionContactsCreatorsFlag.loading(true));
+        dispatch(ActionContactsCreatorsFlag.editContacts.pending());
+        const response = await api.edit(contacts, id);
+        dispatch(
+          ActionContactsCreatorsFlag.editContacts.success(response.statusText)
+        );
+        dispatch(ActionContactsCreatorsFlag.loading(false));
+        dispatch(ActionContactsCreators.get());
+      } catch (error) {
+        dispatch(ActionContactsCreatorsFlag.editContacts.failed(error));
+      }
+    },
+  search: (value: string) => async (dispatch: AppDispatch) => {
     try {
       dispatch(ActionContactsCreatorsFlag.loading(true));
-      dispatch(ActionContactsCreatorsFlag.editContacts.pending());
-      const response = await api.edit(contacts, id);
-      dispatch(
-        ActionContactsCreatorsFlag.editContacts.success(response.statusText)
-      );
+      dispatch(ActionContactsCreatorsFlag.searchContacts.pending());
+      const response = await api.search(value);
+      dispatch(ActionContactsCreatorsFlag.searchContacts.success(response));
       dispatch(ActionContactsCreatorsFlag.loading(false));
-      dispatch(ActionContactsCreators.get())
     } catch (error) {
-      dispatch(ActionContactsCreatorsFlag.editContacts.failed(error));
+      dispatch(ActionContactsCreatorsFlag.searchContacts.failed(error));
     }
   },
 };
