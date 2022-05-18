@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/fictional-dollop/static/css/main.d958ce65.css",
-    "main.js": "/fictional-dollop/static/js/main.59a77093.js",
+    "main.js": "/fictional-dollop/static/js/main.0f72f98c.js",
     "index.html": "/fictional-dollop/index.html",
     "main.d958ce65.css.map": "/fictional-dollop/static/css/main.d958ce65.css.map",
-    "main.59a77093.js.map": "/fictional-dollop/static/js/main.59a77093.js.map"
+    "main.0f72f98c.js.map": "/fictional-dollop/static/js/main.0f72f98c.js.map"
   },
   "entrypoints": [
     "static/css/main.d958ce65.css",
-    "static/js/main.59a77093.js"
+    "static/js/main.0f72f98c.js"
   ]
 }
